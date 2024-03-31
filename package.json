@@ -1,0 +1,23 @@
+{
+  "displayName": "Сommands",
+  "description": "The Commands is a flexible and extensible solution for organizing logic in Unity. ",
+  "author": {
+    "name": "Taras Lazoriv",
+    "url": "https://github.com/TarasLazoriv/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarasLazoriv/Commands.git"
+  },
+  "keywords": [
+    "unity",
+    "command",
+    "executor",
+	"runner"
+  ],
+  "name": "com.lazerlabs.commands",
+  "version": "0.0.1",
+  "type": "library",
+  "unity": "2020.3",
+  "license": "MIT"
+}

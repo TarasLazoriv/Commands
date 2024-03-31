@@ -1,0 +1,8 @@
+# Unity Package Manager (UPM) generated
+/Packages/
+/Packages/**/*.tgz
+/Packages/**/*.unitypackage
+/Packages/**/*.json
+/Packages/**/*.lock
+
+# End of Unity Package Manager (UPM) generated
