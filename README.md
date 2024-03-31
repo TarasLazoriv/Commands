@@ -13,30 +13,35 @@ The Executor acts as a bridge between commands and runners. It is responsible fo
 Usage
 Here's a simple example of using the Commands Package:
 ```csharp
-TestCommand command = new TestCommand();
-CommandRunner runner = new CommandRunner();
-TestExecutor executor = new TestExecutor(command, runner);
+using System;
+using LazerLabs.Commands;
+using UnityEngine;
 
-public class TestCommand : ICommandVoid<string>
+public sealed class MonoTest : MonoBehaviour
 {
-    public void Execute(string v)
+   private readonly TestCommand m_command = new TestCommand();
+   private readonly CommandRunner m_runner = new CommandRunner();
+
+    public class TestCommand : ICommand
     {
-        Debug.Log("Hello World");
+        public void Execute()
+        {
+            Debug.Log("Hello World");
+        }
     }
-}
 
-public class TestExecutor : DefaultExecutor
-{
-    public TestExecutor(ICommand command, ICommandVoid<Action> runner) : base(command, runner) { }
-}
-
-private void Update()
-{
-    if (Input.GetKeyUp(KeyCode.Space))
+    public class TestExecutor : DefaultExecutor
     {
+        public TestExecutor(ICommand command, ICommandVoid<Action> runner) : base(command, runner) { }
+    }
+
+    private void Start()
+    {
+        TestExecutor executor = new TestExecutor(m_command, m_runner);
         executor.Execute();
     }
 }
+
 ```
 Benefits
 Reduced coupling with Unity, simplifying logic and making it more portable.
