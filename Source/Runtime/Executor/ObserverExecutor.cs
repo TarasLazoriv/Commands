@@ -2,7 +2,8 @@ using System;
 
 namespace LazerLabs.Commands
 {
-    public abstract class ObserverExecutor : DefaultExecutor, IObserver<Unit>
+    public abstract class ObserverExecutor : ObserverExecutor<Unit> { }
+    public abstract class ObserverExecutor<T> : DefaultExecutor, IObserver<T>
     {
         private IDisposable m_disposable = default;
 
@@ -16,7 +17,7 @@ namespace LazerLabs.Commands
             throw error;
         }
 
-        public virtual void OnNext(Unit _)
+        public virtual void OnNext(T _)
         {
             Execute();
         }

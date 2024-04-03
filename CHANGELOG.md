@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.3] - 2024-04-03
+### Added
+- Type based observer executor
+- folders to editor
+
 ## [0.0.2] - 2024-04-03
 ### Added
 - Values
