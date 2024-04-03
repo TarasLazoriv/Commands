@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 
 namespace LazerLabs.Commands
 {
-    public abstract class ObservableCoroutineExecutor : CoroutineExecutor, IObserver<Unit>
+    public abstract class ObserverExecutor : DefaultExecutor, IObserver<Unit>
     {
         private IDisposable m_disposable = default;
-        protected ObservableCoroutineExecutor(ICommand<IEnumerator> command, ICommandVoid<Func<IEnumerator>> runner) : base(command, runner) { }
 
         public virtual void OnCompleted()
         {
@@ -23,10 +21,6 @@ namespace LazerLabs.Commands
             Execute();
         }
 
-        protected virtual void Subscribe(IObservable<Unit> v)
-        {
-            v.Subscribe(this);
-        }
         protected virtual void UnSubscribe()
         {
             m_disposable?.Dispose();

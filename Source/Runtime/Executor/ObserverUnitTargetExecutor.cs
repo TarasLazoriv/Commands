@@ -2,11 +2,9 @@ using System;
 
 namespace LazerLabs.Commands
 {
-    public abstract class ObservableExecutor : DefaultExecutor, IObserver<Unit>
+    public abstract class ObserverUnitTargetExecutor<TTarget> : TargetExecutor<TTarget>, IObserver<Unit>
     {
         private IDisposable m_disposable = default;
-        protected ObservableExecutor(ICommand command, ICommandVoid<Action> runner) : base(command, runner) { }
-
         public virtual void OnCompleted()
         {
             UnSubscribe();
@@ -19,13 +17,16 @@ namespace LazerLabs.Commands
 
         public virtual void OnNext(Unit _)
         {
-            Execute();
+            if (Target != null)
+            {
+                Execute();
+            }
+            else
+            {
+                throw new NullReferenceException($"{nameof(ObserverExecutor)} Target is null");
+            }
         }
-
-        protected virtual void Subscribe(IObservable<Unit> v)
-        {
-            v.Subscribe(this);
-        }
+        
         protected virtual void UnSubscribe()
         {
             m_disposable?.Dispose();

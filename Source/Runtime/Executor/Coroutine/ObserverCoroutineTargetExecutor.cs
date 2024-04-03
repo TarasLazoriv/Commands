@@ -3,14 +3,12 @@ using System.Collections;
 
 namespace LazerLabs.Commands
 {
-    public abstract class ObservableCoroutineTargetExecutor<TTarget> : CoroutineTargetExecutor<TTarget>, IObserver<TTarget>
+    public abstract class ObserverCoroutineTargetExecutor<TTarget> : CoroutineTargetExecutor<TTarget>, IObserver<TTarget>
     {
         private IDisposable m_disposable = default;
         protected override TTarget Target => m_target;
 
         private TTarget m_target = default;
-
-        protected ObservableCoroutineTargetExecutor(ICommand<TTarget, IEnumerator> command, ICommandVoid<Func<IEnumerator>> runner) : base(command, runner) { }
 
         public virtual void OnCompleted()
         {
@@ -31,14 +29,10 @@ namespace LazerLabs.Commands
             }
             else
             {
-                throw new NullReferenceException($"{nameof(ObservableTargetExecutor<TTarget>)} Target is null");
+                throw new NullReferenceException($"{nameof(ObserverTargetExecutor<TTarget>)} Target is null");
             }
         }
-
-        protected virtual void Subscribe(IObservable<TTarget> v)
-        {
-            v.Subscribe(this);
-        }
+        
         protected virtual void UnSubscribe()
         {
             m_disposable?.Dispose();
