@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.4] - 2024-04-04
+### Added
+- Added mono input Executor
+- Added stoppable to Coroutine Runner
+
 ## [0.0.3] - 2024-04-03
 ### Added
 - Type based observer executor
