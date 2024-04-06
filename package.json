@@ -16,7 +16,7 @@
 	"runner"
   ],
   "name": "com.lazerlabs.commands",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "library",
   "unity": "2020.3",
   "license": "MIT"

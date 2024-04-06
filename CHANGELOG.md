@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.5] - 2024-04-06
+### Added
+- Added mono other one input Executor
+- Added mono executor and runner
+
 ## [0.0.4] - 2024-04-04
 ### Added
 - Added mono input Executor
