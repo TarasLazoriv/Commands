@@ -5,7 +5,7 @@ namespace LazerLabs.Commands
 {
     public abstract class CoroutineCommandObserverTargetExecutor<TTarget> : ObserverTargetExecutor<TTarget, Func<IEnumerator>>
     {
-        public abstract ICommand<TTarget, IEnumerator> Command { get; }
+        protected abstract ICommand<TTarget, IEnumerator> Command { get; }
         protected override Func<IEnumerator> Context => ExecuteCommand;
 
         protected virtual IEnumerator ExecuteCommand()

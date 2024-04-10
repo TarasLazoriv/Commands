@@ -5,7 +5,7 @@ namespace LazerLabs.Commands
 {
     public abstract class AsyncCommandExecutor : DefaultExecutor<Func<Task>>
     {
-        public abstract IAsyncCommand Command { get; }
+        protected abstract IAsyncCommand Command { get; }
         protected override Func<Task> Context => Command.Execute;
     }
 }

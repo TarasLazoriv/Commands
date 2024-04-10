@@ -4,13 +4,13 @@ namespace LazerLabs.Commands
 {
     public abstract class CommandExecutor : DefaultExecutor<Action>
     {
-        public abstract ICommand Command { get; }
+        protected abstract ICommand Command { get; }
         protected override Action Context => Command.Execute;
     }
 
     public abstract class CommandExecutor<T1> : TargetExecutor<T1, Action>
     {
-        public abstract ICommandVoid<T1> Command { get; }
+        protected abstract ICommandVoid<T1> Command { get; }
         protected override Action Context => ExecuteCommand;
 
         protected virtual void ExecuteCommand()
@@ -21,7 +21,7 @@ namespace LazerLabs.Commands
 
     public abstract class CommandExecutor<T1, T2> : TargetExecutor<T1, T2, Action>
     {
-        public abstract ICommandVoid<T1, T2> Command { get; }
+        protected abstract ICommandVoid<T1, T2> Command { get; }
         protected override Action Context => ExecuteCommand;
 
         protected virtual void ExecuteCommand()
@@ -34,7 +34,7 @@ namespace LazerLabs.Commands
 
     public abstract class CommandExecutor<T1, T2, T3> : TargetExecutor<T1, T2, T3, Action>
     {
-        public abstract ICommandVoid<T1, T2, T3> Command { get; }
+        protected abstract ICommandVoid<T1, T2, T3> Command { get; }
         protected override Action Context => ExecuteCommand;
 
         protected virtual void ExecuteCommand()

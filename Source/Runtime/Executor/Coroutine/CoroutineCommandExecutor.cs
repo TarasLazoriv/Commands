@@ -5,13 +5,13 @@ namespace LazerLabs.Commands
 {
     public abstract class CoroutineCommandExecutor : DefaultExecutor<Func<IEnumerator>>
     {
-        public abstract ICommand<IEnumerator> Command { get; }
+        protected abstract ICommand<IEnumerator> Command { get; }
         protected override Func<IEnumerator> Context => Command.Execute;
     }
 
     public abstract class CoroutineCommandExecutor<T1> : TargetExecutor<T1, Func<IEnumerator>>
     {
-        public abstract ICommand<T1, IEnumerator> Command { get; }
+        protected abstract ICommand<T1, IEnumerator> Command { get; }
         protected override Func<IEnumerator> Context => ExecuteCommand;
 
         protected virtual IEnumerator ExecuteCommand()
@@ -22,7 +22,7 @@ namespace LazerLabs.Commands
 
     public abstract class CoroutineCommandExecutor<T1, T2> : TargetExecutor<T1, T2, Func<IEnumerator>>
     {
-        public abstract ICommand<T1, T2, IEnumerator> Command { get; }
+        protected abstract ICommand<T1, T2, IEnumerator> Command { get; }
         protected override Func<IEnumerator> Context => ExecuteCommand;
 
         protected virtual IEnumerator ExecuteCommand()
@@ -35,7 +35,7 @@ namespace LazerLabs.Commands
 
     public abstract class CoroutineCommandExecutor<T1, T2, T3> : TargetExecutor<T1, T2, T3, Func<IEnumerator>>
     {
-        public abstract ICommand<T1, T2, T3, IEnumerator> Command { get; }
+        protected abstract ICommand<T1, T2, T3, IEnumerator> Command { get; }
         protected override Func<IEnumerator> Context => ExecuteCommand;
 
         protected virtual IEnumerator ExecuteCommand()
