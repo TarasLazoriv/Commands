@@ -2,8 +2,8 @@ using System;
 
 namespace LazerLabs.Commands
 {
-    public abstract class ObserverExecutor : ObserverExecutor<Unit> { }
-    public abstract class ObserverExecutor<T> : DefaultExecutor, IObserver<T>
+    public abstract class ObserverMonoExecutor : ObserverMonoExecutor<Unit> { }
+    public abstract class ObserverMonoExecutor<T> : DefaultMonoExecutor, IObserver<T>
     {
         private IDisposable m_disposable = default;
 
@@ -26,11 +26,6 @@ namespace LazerLabs.Commands
         {
             m_disposable?.Dispose();
             m_disposable = null;
-        }
-        
-        ~ObserverExecutor()
-        {
-            UnSubscribe();
         }
     }
 }

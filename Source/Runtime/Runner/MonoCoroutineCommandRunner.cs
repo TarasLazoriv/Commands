@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    public sealed class MonoCoroutineCommandRunner : MonoBehaviour, ICommandVoid<Func<IEnumerator>>, ICoroutineStoppable
+    public sealed class MonoCoroutineCommandRunner : MonoBehaviour, ICoroutineCommandRunner
     {
         private Coroutine m_coroutine = default;
 

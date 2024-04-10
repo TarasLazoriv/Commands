@@ -5,7 +5,8 @@ using UnityEngine;
 namespace LazerLabs.Commands
 {
     public interface ICoroutineStoppable : ICommand { }
-    public sealed class CoroutineCommandRunner : ICommandVoid<Func<IEnumerator>>, ICoroutineStoppable
+    public interface ICoroutineCommandRunner : ICoroutineStoppable, ICommandVoid<Func<IEnumerator>> { }
+    public sealed class CoroutineCommandRunner : ICoroutineCommandRunner
     {
         private readonly ICoroutine m_coroutineLogic = default;
         private Coroutine m_coroutine = default;

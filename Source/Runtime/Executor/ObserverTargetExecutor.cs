@@ -8,7 +8,7 @@ namespace LazerLabs.Commands
         protected override TTarget Target => m_target;
 
         private TTarget m_target = default;
-        
+
 
         public virtual void OnCompleted()
         {
@@ -38,7 +38,10 @@ namespace LazerLabs.Commands
             m_disposable?.Dispose();
             m_disposable = null;
         }
+
+        ~ObserverTargetExecutor()
+        {
+            UnSubscribe();
+        }
     }
-
-
 }
