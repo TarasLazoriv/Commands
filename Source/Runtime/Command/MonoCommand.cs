@@ -1,13 +1,13 @@
-using System.Collections;
+using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    public abstract class MonoCommand : ICommand
+    public abstract class MonoCommand : MonoBehaviour, ICommand
     {
         public abstract void Execute();
     }
 
-    public abstract class MonoCommand<T> : ICommandVoid<T>
+    public abstract class MonoCommand<T> : MonoBehaviour, ICommandVoid<T>
     {
         public abstract void Execute(T target);
     }

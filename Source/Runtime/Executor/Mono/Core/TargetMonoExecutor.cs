@@ -1,25 +1,8 @@
-using System;
-
 namespace LazerLabs.Commands
 {
-    public abstract class TargetMonoExecutor<TTarget> : BaseMonoExecutor<ICommandVoid<Action>, Action>
+    public abstract class TargetMonoExecutor<TTarget, TContext> : DefaultMonoExecutor<TContext>
     {
-        protected abstract ICommandVoid<TTarget> Command { get; }
         protected abstract TTarget Target { get; }
 
-        protected override Action Context => GenerateContext;
-
-
-        protected virtual void GenerateContext()
-        {
-            if (Target != null)
-            {
-                Command.Execute(Target);
-            }
-            else
-            {
-                throw new NullReferenceException($"{nameof(TargetExecutor<TTarget>)} Target is Null");
-            }
-        }
     }
 }

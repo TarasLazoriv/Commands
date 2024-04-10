@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace LazerLabs.Commands
 {
-    public abstract class UnityEventTargetMonoExecutor<TTarget> : TargetMonoExecutor<TTarget>
+    public abstract class UnityEventTargetMonoExecutor<TTarget, TContext> : TargetMonoExecutor<TTarget, TContext>
     {
         [SerializeField] protected bool OnStartSubscribe = default;
         protected abstract UnityEvent<TTarget> Event { get; }
@@ -11,8 +11,9 @@ namespace LazerLabs.Commands
 
         private TTarget m_target = default;
 
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
             if (OnStartSubscribe)
             {
                 Subscribe();

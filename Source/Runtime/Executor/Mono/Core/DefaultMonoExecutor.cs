@@ -1,11 +1,19 @@
-using System;
+using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    public abstract class DefaultMonoExecutor : BaseMonoExecutor<ICommandVoid<Action>, Action>
+    public abstract class DefaultMonoExecutor<TContext> : BaseMonoExecutor<ICommandVoid<TContext>, TContext>
     {
-        protected abstract ICommand Command { get; }
 
-        protected override Action Context => Command.Execute;
+        [SerializeField] private bool m_onStartExecute = default;
+
+
+        protected virtual void Start()
+        {
+            if (m_onStartExecute)
+            {
+                Execute();
+            }
+        }
     }
 }

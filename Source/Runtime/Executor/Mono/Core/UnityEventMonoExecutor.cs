@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace LazerLabs.Commands
 {
-    public abstract class UnityEventMonoExecutor : DefaultMonoExecutor
+    public abstract class UnityEventMonoExecutor<TContext> : DefaultMonoExecutor<TContext>
     {
         [SerializeField] protected bool OnStartSubscribe = default;
         protected abstract UnityEvent Event { get; }
 
-        protected virtual void Start()
+        protected override void Start()
         {
+            base.Start();
             if (OnStartSubscribe)
             {
                 Subscribe();
@@ -38,13 +38,14 @@ namespace LazerLabs.Commands
 
     }
 
-    public abstract class UnityEventMonoExecutor<TEvent> : DefaultMonoExecutor
+    public abstract class UnityEventMonoExecutor<TEvent, TContext> : DefaultMonoExecutor<TContext>
     {
         [SerializeField] protected bool OnStartSubscribe = default;
         protected abstract UnityEvent<TEvent> Event { get; }
 
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
             if (OnStartSubscribe)
             {
                 Subscribe();

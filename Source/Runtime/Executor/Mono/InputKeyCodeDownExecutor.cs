@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    public abstract class InputKeyCodeDownExecutor : DefaultMonoExecutor
+    public abstract class InputKeyCodeDownExecutor : DefaultMonoExecutor<Action>
     {
         [SerializeField] private KeyCode m_inputKeyCode = default;
 
