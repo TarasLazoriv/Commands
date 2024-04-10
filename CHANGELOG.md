@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.7] - 2024-04-10
+### Fixed
+- Input issue
+- some access modifiers
+
 ## [0.0.6] - 2024-04-10
 ### Added
 - Async runner and executor

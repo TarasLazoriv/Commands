@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    public abstract class InputKeyCodeUpExecutor : DefaultMonoExecutor<Action>
+    public abstract class InputKeyCodeUpExecutor : CommandMonoExecutor
     {
         [SerializeField] private KeyCode m_inputKeyCode = default;
 
