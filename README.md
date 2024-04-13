@@ -1,8 +1,9 @@
-## Your Command Package Description (.md)
+## Commands Description
 
 ### Overview
 
 The Command Package implements the core principles of the Command pattern, but it is not a full implementation in the classical sense. Rather, it is a practical adaptation of the pattern for Unity. It allows developers to separate execution logic from execution time and execution place.
+You can also take a look at [DuckHunt](https://github.com/TarasLazoriv/DuckHunt). It was created as a demonstration of the capabilities of this package.
 
 ### Key Components
 
@@ -106,6 +107,7 @@ public sealed class TestCommand : MonoCommand
 
 ### Additional Features
 
+* **ValueContainer:** A simple data storage container. It can be used in many places. For example, a mono container can be used to hold references to objects in the scene and provide access to them through context of your DI.
 * **Code generator:** Accelerate the development process.
 * **Many ready-to-go components:** That you can use right away.
 * **Custom providers:** Define your own ways to find and create commands, executors, and runners.
