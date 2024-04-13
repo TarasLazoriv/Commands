@@ -1,8 +1,12 @@
 {
-    "name": "LazerLabs.Commands",
+    "name": "LazerLabs.Commands.Editor",
     "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [],
+    "references": [
+        "GUID:3ccf55ae8f7a6b543a0dc03939bfa384"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
