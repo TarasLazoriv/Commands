@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.0] - 2024-04-13
+### Changed
+- On Start access modifiers inside MonoExecutors
+
 ## [0.0.7] - 2024-04-10
 ### Fixed
 - Input issue

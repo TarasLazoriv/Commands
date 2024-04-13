@@ -1,54 +1,123 @@
-The Commands Package is a flexible and extensible solution for organizing logic in Unity. It's inspired by the concept of promises and offers an elegant way to structure and execute code, promoting cleaner, more scalable, and easily maintainable projects.
+## Your Command Package Description (.md)
 
-Core Entities
-Command
-A Command represents a method or a set of logic that can be easily configured and combined. There are two types of commands: regular and target. Regular commands execute a given method, while target commands allow passing parameters to the executed method.
+### Overview
 
-Runner
-A Runner is a logic block responsible for executing commands. Currently, two types of runners are implemented: a regular runner and a coroutine-based runner. An asynchronous runner is planned for future implementation.
+The Command Package implements the core principles of the Command pattern, but it is not a full implementation in the classical sense. Rather, it is a practical adaptation of the pattern for Unity. It allows developers to separate execution logic from execution time and execution place.
 
-Executor
-The Executor acts as a bridge between commands and runners. It is responsible for forming a delegate from a command and launching it on the appropriate runner at the right time. There are different types of executors, including a default executor, an IObservable-based executor, and a special executor for coroutines.
+### Key Components
 
-Usage
-Here's a simple example of using the Commands Package:
-```csharp
-TestCommand command = new TestCommand();
-CommandRunner runner = new CommandRunner();
-TestExecutor executor = new TestExecutor(command, runner);
+* **Commands:** Define *what* to do (logic).
+    * Implement the `ICommand` or `ICommandVoid<T>` interface.
+* **Executors:** Define *when* to execute a command.
+    * Implement the `ICommandExecutor` interface.
+* **Runners:** Define *where* to execute a command.
+    * Implement the `ICommandRunner` interface.
 
-public class TestCommand : ICommandVoid<string>
+### Advantages
+
+* **Readability:**
+    * Logic, execution time, and execution place are separated,
+    * making code more understandable and maintainable.
+* **Flexibility:**
+    * You can easily change logic, execution time, or execution place independently of each other.
+* **Extensibility:**
+    * You can create custom executors and runners to implement different scenarios.
+* **Testability:**
+    * Easier to test individual components (commands, executors, runners).
+* **Reusability:**
+    * Commands can be easily reused in different parts of the code.
+
+### Differences from MonoBehaviour
+
+| Feature | MonoBehaviour | Command Package |
+|---|---|---|
+| Logic | Mixed with execution time and execution place | Separate |
+| Execution time | Defined by lifecycle methods (Awake, Start, Update) | Defined by executors |
+| Execution place | Defined by the GameObject context | Defined by runners |
+| Readability | Can be less readable for complex logic | More readable due to separation of concerns |
+| Maintainability | Harder to modify individual parts | Easier to modify logic, execution time, or execution place |
+| Extensibility | Limited by lifecycle methods | Easy to create custom components |
+
+### Use Cases
+
+**1) Outside Unity Context:**
+
+* **Basic Elements:** Commands, executors, and runners are not Unity dependent.
+* **Instantiating:** You can create them anywhere and however you want, without using Unity-specific methods.
+* **Use Cases:**
+    * Basic data operations (read, write, sort, filter).
+    * Processing algorithms (search, encryption, compression).
+    * Asynchronous tasks (data loading, network interaction).
+
+**2) DI with Zenject:**
+
+* **Registering Commands, Executors, and Runners:**
+
+```c#
+Container
+    .Bind<ITestCommand>()
+    .To<MyTestCommand>() // Your implementation of ITestCommand
+    .AsSingle();
+
+Container
+    .Bind<ICommandRunner>()
+    .To<CommandRunner>()
+    .AsTransient();
+
+Container
+    .Bind<TestExecutor>()
+    .AsSingle()
+    .NonLazy();
+```
+
+**3) Standard Unity Component System:**
+
+* **Write MonoBehaviour components to implement executors and runners.**
+
+```c#
+public sealed class TestMonoExecutor : CommandMonoExecutor
 {
-    public void Execute(string v)
-    {
-        Debug.Log("Hello World");
-    }
+    [SerializeField] private MonoCommand m_command = default; // Your command
+    [SerializeField] private CommandMonoRunner m_runner = default; // Standard (included in the package) mono runner
+
+    protected override ICommandVoid<Action> Runner => m_runner;
+    protected override ICommand Command => m_command;
 }
 
-public class TestExecutor : DefaultExecutor
+public sealed class TestCommand : MonoCommand
 {
-    public TestExecutor(ICommand command, ICommandVoid<Action> runner) : base(command, runner) { }
-}
-
-private void Update()
-{
-    if (Input.GetKeyUp(KeyCode.Space))
+    public override void Execute()
     {
-        executor.Execute();
+        /*
+        *
+        * Some logic
+        *
+        */
     }
 }
 ```
-Benefits
-Reduced coupling with Unity, simplifying logic and making it more portable.
-Flexible and easily scalable structure, allowing command combinations and complex logic creation.
-Ability to use different types of runners, including coroutines and asynchronous operations (planned).
-Future Development
-Future plans include adding asynchronous types of commands, executors, and runners, as well as expanding the existing functionality of the package.
 
-Potential Issues and Limitations:
--Possible performance issues with very large numbers of commands, as each command allocates some memory.
-Requirements and Dependencies
-The Commands Package has no external dependencies and can be used in any Unity project.
+**4) Mixed Approach:**
 
-License
-The Commands Package is licensed under the MIT License.
+* **Creating custom elements:**
+    * Implement your custom executors, runners, and commands.
+* **Mixing approaches:**
+    * Use Zenject to register parts of the system, and the Unity component system for other parts.
+
+### Additional Features
+
+* **Code generator:** Accelerate the development process.
+* **Many ready-to-go components:** That you can use right away.
+* **Custom providers:** Define your own ways to find and create commands, executors, and runners.
+* **Extend the package:** Create your own interfaces and implementations to extend the functionality of Command Package.
+
+**Project Example:**
+
+[DuckHunt](https://github.com/TarasLazoriv/DuckHunt) is a real-world project that uses the Command Package to implement the game logic. The project demonstrates how to use all of the features of the package, and it provides a good example of how to use the package in a real application.
+
+### Conclusion
+
+
+The Command Package is a powerful tool that can significantly improve the quality of Unity code. By understanding its capabilities and use cases, developers can enhance code readability, maintainability, flexibility, and reusability.
+
+I hope this summary provides a clear understanding of the Command Package's purpose, components, advantages, use cases, additional features, and real-world applications. Please let me know if you have any further questions.
