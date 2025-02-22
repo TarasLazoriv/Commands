@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace LazerLabs.Commands
 {
-    public abstract class BaseButtonExecutor<TContext> : UnityEventMonoExecutor<TContext>
+    public abstract class BaseButtonExecutor<TContext> : BaseUnityEventMonoExecutor<TContext>
     {
         [SerializeField] private Button m_button = default;
         protected override UnityEvent Event => m_button.onClick;
