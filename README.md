@@ -114,7 +114,7 @@ public sealed class TestCommand : MonoCommand
 * **Extend the package:** Create your own interfaces and implementations to extend the functionality of Command Package.
 
 **Project Example:**
-
+![DuckHunt](https://i.postimg.cc/nc25Dpx9/images.jpg)
 [DuckHunt](https://github.com/TarasLazoriv/DuckHunt) is a real-world project that uses the Command Package to implement the game logic. The project demonstrates how to use all of the features of the package, and it provides a good example of how to use the package in a real application.
 
 ### Conclusion
