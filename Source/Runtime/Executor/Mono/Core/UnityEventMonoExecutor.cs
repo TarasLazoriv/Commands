@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace LazerLabs.Commands
 {
-    public abstract class UnityEventMonoExecutor<TContext> : DefaultMonoExecutor<TContext>
+    public abstract class BaseUnityEventMonoExecutor<TContext> : DefaultMonoExecutor<TContext>
     {
         [SerializeField] protected bool OnStartSubscribe = default;
         protected abstract UnityEvent Event { get; }
@@ -31,15 +32,16 @@ namespace LazerLabs.Commands
             Event.RemoveListener(OnNext);
         }
 
-        ~UnityEventMonoExecutor()
+        ~BaseUnityEventMonoExecutor()
         {
             UnSubscribe();
         }
 
     }
 
-    public abstract class UnityEventMonoExecutor<TEvent, TContext> : DefaultMonoExecutor<TContext>
+    public abstract class BaseUnityEventMonoExecutor<TEvent, TContext> : DefaultMonoExecutor<TContext>
     {
+
         [SerializeField] protected bool OnStartSubscribe = default;
         protected abstract UnityEvent<TEvent> Event { get; }
 
@@ -67,9 +69,19 @@ namespace LazerLabs.Commands
             Event.RemoveListener(OnNext);
         }
 
-        ~UnityEventMonoExecutor()
+        ~BaseUnityEventMonoExecutor()
         {
             UnSubscribe();
         }
+    }        
+
+
+    public abstract class UnityEventMonoExecutor<TEvent> : BaseUnityEventMonoExecutor<TEvent, Action>
+    {
+        protected override Action Context => () => Command.Execute();
+
+        protected abstract ICommand Command { get; }
+
     }
+
 }
