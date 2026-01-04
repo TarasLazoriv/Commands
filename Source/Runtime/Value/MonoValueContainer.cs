@@ -2,9 +2,16 @@ using UnityEngine;
 
 namespace LazerLabs.Commands
 {
-    //MonoValueContainer can only be ReadOnly, value is set via SerializeField.
-    public abstract class MonoValueContainer<T> : MonoBehaviour, IReadOnlyValueContainer<T>
+    public abstract class MonoValueContainer<T> : MonoBehaviour, IValueContainer<T>
     {
-        [field: SerializeField] public T Value { get; private set; }
+        [field: SerializeField] private T Value { get; set; }
+
+        T IReadOnlyValueContainer<T>.Value => Value;
+
+        T IValueContainer<T>.Value
+        {
+            get => Value;
+            set => Value = value;
+        }
     }
 }
